@@ -36,8 +36,8 @@ describe('CiudadSupermercadoService', () => {
     for(let i = 0; i < 5; i++){
         const supermercado: SupermercadoEntity = await supermercadoRepository.save({
           nombre: faker.company.name(),
-          latitud: parseFloat(faker.address.latitude()),
-          longitud: parseFloat(faker.address.longitude()),
+          latitud: faker.address.latitude(),
+          longitud: faker.address.longitude(),
           paginaWeb: faker.internet.url()
         })
         supermercadosList.push(supermercado);
@@ -58,8 +58,8 @@ describe('CiudadSupermercadoService', () => {
   it('addSupermarketToCity should add an supermercado to a ciudad', async () => {
     const newSupermercado: SupermercadoEntity = await supermercadoRepository.save({
       nombre: faker.company.name(),
-      latitud: parseFloat(faker.address.latitude()),
-      longitud: parseFloat(faker.address.longitude()),
+      latitud: faker.address.latitude(),
+      longitud: faker.address.longitude(),
       paginaWeb: faker.internet.url()
     });
 
@@ -89,8 +89,8 @@ describe('CiudadSupermercadoService', () => {
   it('addSupermarketToCity should throw an exception for an invalid ciudad', async () => {
     const newSupermercado: SupermercadoEntity = await supermercadoRepository.save({
       nombre: faker.company.name(),
-      latitud: parseFloat(faker.address.latitude()),
-      longitud: parseFloat(faker.address.longitude()),
+      latitud: faker.address.latitude(),
+      longitud: faker.address.longitude(),
       paginaWeb: faker.internet.url()
     });
 
@@ -116,8 +116,8 @@ describe('CiudadSupermercadoService', () => {
   it('findSupermarketFromCity should throw an exception for an supermercado not associated to the ciudad', async () => {
     const newSupermercado: SupermercadoEntity = await supermercadoRepository.save({
       nombre: faker.company.name(),
-      latitud: parseFloat(faker.address.latitude()),
-      longitud: parseFloat(faker.address.longitude()),
+      latitud: faker.address.latitude(),
+      longitud: faker.address.longitude(),
       paginaWeb: faker.internet.url()
     });
 
@@ -136,8 +136,8 @@ describe('CiudadSupermercadoService', () => {
   it('updateSupermarketsFromCity should update supermercados list for a ciudad', async () => {
     const newSupermercado: SupermercadoEntity = await supermercadoRepository.save({
       nombre: faker.company.name(),
-      latitud: parseFloat(faker.address.latitude()),
-      longitud: parseFloat(faker.address.longitude()),
+      latitud: faker.address.latitude(),
+      longitud: faker.address.longitude(),
       paginaWeb: faker.internet.url()
     });
 
@@ -151,8 +151,8 @@ describe('CiudadSupermercadoService', () => {
   it('updateSupermarketsFromCity should throw an exception for an invalid ciudad', async () => {
     const newSupermercado: SupermercadoEntity = await supermercadoRepository.save({
       nombre: faker.company.name(),
-      latitud: parseFloat(faker.address.latitude()),
-      longitud: parseFloat(faker.address.longitude()),
+      latitud: faker.address.latitude(),
+      longitud: faker.address.longitude(),
       paginaWeb: faker.internet.url()
     });
 
@@ -189,8 +189,8 @@ describe('CiudadSupermercadoService', () => {
   it('deleteSupermarketFromCity should thrown an exception for an non asocciated supermercado', async () => {
     const newSupermercado: SupermercadoEntity = await supermercadoRepository.save({
       nombre: faker.company.name(),
-      latitud: parseFloat(faker.address.latitude()),
-      longitud: parseFloat(faker.address.longitude()),
+      latitud: faker.address.latitude(),
+      longitud: faker.address.longitude(),
       paginaWeb: faker.internet.url()
     });
 
