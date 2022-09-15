@@ -1,0 +1,864 @@
+{
+	"info": {
+		"_postman_id": "04967ffb-1151-41a5-9720-64bc82b90f18",
+		"name": "Ciudad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23051864"
+	},
+	"item": [
+		{
+			"name": "Crear una ciudad valida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"city_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Argentina\",\n    \"numeroHabitantes\": 15483254\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 Crear una ciudad valida",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Argentina\",\n    \"numeroHabitantes\": 15483254\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cities",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "116"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"74-mnAbf9jhHipY6TsX3CIsnykK5Uo\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 17:30:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Argentina\",\n    \"numeroHabitantes\": 15483254,\n    \"id\": \"95749339-9a1c-48f6-a661-d0acb20b4a1a\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear una ciudad invalida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"   pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Peru\",\n    \"numeroHabitantes\": \"string\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear una ciudad invalida",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Peru\",\n    \"numeroHabitantes\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cities",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "170"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"aa-aDwmBfMKKEc3lJR6kacJAx2RzEA\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 17:33:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 400,\n    \"message\": [\n        \"pais must be one of the following values: Argentina, Ecuador, Paraguay\",\n        \"numeroHabitantes must be an integer number\"\n    ],\n    \"error\": \"Bad Request\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas las ciudades",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of cities > ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Argentina\",\n    \"numeroHabitantes\": 15483254\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todas las ciudades",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Argentina\",\n    \"numeroHabitantes\": 15483254\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cities",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "273"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"111-4JyCw/ONqxxizH/2pvwJGnNtkPY\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 17:36:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"95749339-9a1c-48f6-a661-d0acb20b4a1a\",\n        \"nombre\": \"Buenos aires\",\n        \"pais\": \"Argentina\",\n        \"numeroHabitantes\": 15483254,\n        \"supermercados\": []\n    },\n    {\n        \"id\": \"f95a3fb1-9d51-4f30-9903-3be0f3e65cd4\",\n        \"nombre\": \"Buenos aires\",\n        \"pais\": \"Argentina\",\n        \"numeroHabitantes\": 15483254,\n        \"supermercados\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener una ciudad por ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/{{city_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						"{{city_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener una ciudad por ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cities/{{city_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "135"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"87-Ig3ts2pxrbma7xu3HxLOc7peQ+A\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 17:42:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"59ec295d-a436-42b0-a9ee-09a3635b9237\",\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Argentina\",\n    \"numeroHabitantes\": 15483254,\n    \"supermercados\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una ciudad por un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Ciudad no encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/no_existe",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						"no_existe"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener una ciudad por un ID que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cities/{{bad_city_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								"{{bad_city_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"33-IeGrORbP5ph+aqJToHbq3zxIK3Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 17:47:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"Ciudad no encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar una ciudad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Argentina\",\n    \"numeroHabitantes\": 9999999\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities/{{city_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						"{{city_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar una ciudad",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Argentina\",\n    \"numeroHabitantes\": 9999999\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cities/{{city_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "115"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"73-RDB/UclQeIwT23nGgATYVtFqBE8\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 17:52:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Argentina\",\n    \"numeroHabitantes\": 9999999,\n    \"id\": \"e649b902-ff0c-4868-b311-e0dda764d596\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar una ciudad con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Ciudad no encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Argentina\",\n    \"numeroHabitantes\": 9999999\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities/{{bad_city_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						"{{bad_city_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar una ciudad con un ID que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Buenos aires\",\n    \"pais\": \"Argentina\",\n    \"numeroHabitantes\": 9999999\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cities/no_existe",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								"no_existe"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"33-IeGrORbP5ph+aqJToHbq3zxIK3Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 17:55:26 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"Ciudad no encontrada\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar una ciudad por su ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/{{city_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						"{{city_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar una ciudad por su ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cities/{{city_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 17:57:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar una ciudad con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Ciudad no encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/{{bad_city_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						"{{bad_city_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar una ciudad con un ID que no existe",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cities/{{bad_city_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								"{{bad_city_id}}"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "51"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"33-IeGrORbP5ph+aqJToHbq3zxIK3Y\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 17:58:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"Ciudad no encontrada\"\n}"
+				}
+			]
+		}
+	]
+}
